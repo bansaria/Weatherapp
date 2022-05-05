@@ -1,4 +1,4 @@
-package com.tympahealth.weatherapp.data.model
+package com.tympahealth.weatherapp.data.model.current
 
 import com.google.gson.annotations.SerializedName
 
