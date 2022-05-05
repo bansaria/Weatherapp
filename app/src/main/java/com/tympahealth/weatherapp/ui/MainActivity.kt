@@ -23,19 +23,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    public fun showLoading() {
+    fun showLoading() {
         runOnUiThread {
             binding.progressBar.visibility = View.VISIBLE
         }
     }
 
-    public fun hideloading() {
+    fun hideloading() {
         runOnUiThread {
             binding.progressBar.visibility = View.INVISIBLE
         }
     }
 
-    public fun showError(message: String) {
+    fun showError(message: String) {
         runOnUiThread {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
