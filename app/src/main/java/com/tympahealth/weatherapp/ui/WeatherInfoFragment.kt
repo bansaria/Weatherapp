@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tympahealth.weatherapp.R
 import com.tympahealth.weatherapp.data.AppConstant
 import com.tympahealth.weatherapp.data.model.current.CurrentWeatherData
+import com.tympahealth.weatherapp.data.model.forecast.ForecastWeatherData
 import com.tympahealth.weatherapp.databinding.FragmentWeatherInfoBinding
 import com.tympahealth.weatherapp.util.Util
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +55,10 @@ class WeatherInfoFragment : Fragment() {
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner) { data ->
             updateUi(data)
         }
+
+        viewModel.forecastWeatherLiveData.observe(viewLifecycleOwner) { data ->
+            updateForecastData(data)
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -90,5 +95,9 @@ class WeatherInfoFragment : Fragment() {
 
         val weatherDescription = String.format(getString(R.string.text_weather_description), description, "$humidity%")
         binding.tvCurrentWeatherDescription.text = weatherDescription
+    }
+
+    private fun updateForecastData(data: ForecastWeatherData?) {
+
     }
 }
