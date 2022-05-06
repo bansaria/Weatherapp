@@ -1,11 +1,15 @@
 package com.tympahealth.weatherapp.di
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.tympahealth.weatherapp.data.api.WeatherInfoApi
 import com.tympahealth.weatherapp.data.repository.WeatherInfoRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -40,4 +44,10 @@ class WeatherInfoModule {
     @Singleton
     @Provides
     fun provideUserInfoRepository(apiService: WeatherInfoApi): WeatherInfoRepository = WeatherInfoRepository(apiService)
+
+    @Singleton
+    @Provides
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("preferences_name", Context.MODE_PRIVATE)
+    }
 }
