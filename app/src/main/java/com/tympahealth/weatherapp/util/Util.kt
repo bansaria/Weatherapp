@@ -13,7 +13,7 @@ object Util {
 
     fun convertUnixTimeDay(unixTime: Int): String {
         val timelineMilliSec = unixTime.toLong() * 1000
-        val df: Date = Date(timelineMilliSec)
-        return SimpleDateFormat("EEE dd,MMM", Locale.ENGLISH).format(df)
+        val df: Date = Date(timelineMilliSec) //return SimpleDateFormat("EEE dd,MMM", Locale.ENGLISH).format(df)
+        return convertUnixTimeLocalTime(unixTime)
     }
 }

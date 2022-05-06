@@ -36,18 +36,33 @@ class WeatherInfoFragment : Fragment() {
         viewModel = ViewModelProvider(this)[WeatherInfoViewModel::class.java]
         attachObserver()
         binding = FragmentWeatherInfoBinding.inflate(layoutInflater, container, false)
+
+        addListener()
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
+        fetchWeatherInfo()
+    }
+
+    private fun addListener() {
+        binding.swipeLayout.setOnRefreshListener {
+            fetchWeatherInfo()
+        }
+    }
+
+    private fun fetchWeatherInfo() {
         viewModel.getCurrentWeatherInfo("London", AppConstant.API_ID)
         viewModel.getForecastWeatherInfo("London", AppConstant.API_ID)
     }
 
     private fun attachObserver() {
         viewModel.loaderLiveData.observe(viewLifecycleOwner) { isLoader ->
-            if (isLoader) activity.showLoading() else activity.hideloading()
+            if (isLoader) activity.showLoading() else {
+                activity.hideloading()
+                binding.swipeLayout.isRefreshing = false
+            }
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) { message ->
