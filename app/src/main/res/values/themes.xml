@@ -17,29 +17,28 @@
     <style name="styleHeading" parent="@android:style/Widget.TextView">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/_50ssp</item>
+        <item name="android:textSize">@dimen/_45ssp</item>
     </style>
 
-    <style name="styleSubHeading1" parent="@android:style/Widget.TextView">
+    <style name="styleSubHeading" parent="@android:style/Widget.TextView">
         <item name="color">@color/color_sub_heading</item>
-        <item name="android:textSize">@dimen/_13ssp</item>
-    </style>
-
-    <style name="styleSubHeading2" parent="@android:style/Widget.TextView">
-        <item name="color">@color/color_sub_heading</item>
-        <item name="android:textSize">@dimen/_20ssp</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
     </style>
 
 
     <style name="styleDataType" parent="@android:style/Widget.TextView">
         <item name="color">@color/color_sub_heading</item>
-        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
     </style>
 
     <style name="styleBodyCopy" parent="@android:style/Widget.TextView">
         <item name="color">@color/color_sub_heading</item>
-        <item name="android:textSize">@dimen/_11ssp</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
     </style>
 
+    <style name="styleDataBody" parent="@android:style/Widget.TextView">
+        <item name="color">@color/color_sub_heading</item>
+        <item name="android:textSize">@dimen/_8ssp</item>
+    </style>
 
 </resources>

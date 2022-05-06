@@ -5,14 +5,15 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDay"
-        style="@style/styleSubHeading1"
+        style="@style/styleDataType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_dummy_date" />
+        android:text="@string/text_dummy_date"
+        android:textColor="@color/color_sub_heading" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCurrentTemp"
-        style="@style/styleSubHeading1"
+        style="@style/styleBodyCopy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -21,7 +22,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCurrentTempCelsius"
-        style="@style/styleSubHeading1"
+        style="@style/styleBodyCopy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -29,13 +30,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCurrentMaxMinTemp"
-        style="@style/styleDataType"
+        style="@style/styleDataBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvCurrentTemp"
         android:layout_alignParentEnd="true"
-        android:paddingRight="@dimen/_14sdp"
-        android:text="@string/text_sample_value" />
+        android:text="@string/text_sample_value"
+        android:textColor="@color/purple_200" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCurrentWeatherDescription"
@@ -43,14 +44,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvCurrentMaxMinTemp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="@string/text_sample_value" />
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="@string/text_sample_value"
+        android:textColor="@color/teal_700" />
 
     <View
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:layout_below="@+id/tvCurrentWeatherDescription"
+        android:layout_marginTop="@dimen/_10sdp"
         android:background="@color/white" />
 </RelativeLayout>
