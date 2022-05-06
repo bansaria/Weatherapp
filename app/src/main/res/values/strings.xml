@@ -8,4 +8,5 @@
     <string name="text_no_data">No data</string>
     <string name="text_weather_description">Surrounding is %1$s &amp; humidity is %2$s</string>
     <string name="text_5_day_forecast">5 Day forecast details</string>
+    <string name="text_no_connectivity">Please check internet connectivity</string>
 </resources>

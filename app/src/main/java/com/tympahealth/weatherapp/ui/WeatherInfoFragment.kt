@@ -53,8 +53,13 @@ class WeatherInfoFragment : Fragment() {
     }
 
     private fun fetchWeatherInfo() {
-        viewModel.getCurrentWeatherInfo(AppConstant.LOCATION, AppConstant.API_ID)
-        viewModel.getForecastWeatherInfo(AppConstant.LOCATION, AppConstant.API_ID)
+        if (Util.isNetworkAvailable(activity)) {
+            viewModel.getCurrentWeatherInfo(AppConstant.LOCATION, AppConstant.API_ID)
+            viewModel.getForecastWeatherInfo(AppConstant.LOCATION, AppConstant.API_ID)
+        } else {
+            binding.swipeLayout.isRefreshing = false
+            activity.showError(getString(R.string.text_no_connectivity))
+        }
     }
 
     private fun attachObserver() {
