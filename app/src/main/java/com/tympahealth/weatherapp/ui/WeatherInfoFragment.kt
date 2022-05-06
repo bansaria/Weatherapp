@@ -3,6 +3,7 @@ package com.tympahealth.weatherapp.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,43 +88,61 @@ class WeatherInfoFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun updateUi(data: CurrentWeatherData) {
+        val cod = data.cod ?: -1
+        if (cod > 0) {
+            val date = data.dt ?: 0
+            binding.tvRefreshTime.text = Util.convertUnixTimeLocalTime(date)
 
-        val date = data.dt ?: 0
-        binding.tvRefreshTime.text = Util.convertUnixTimeLocalTime(date)
+            val location = data.name ?: getString(R.string.text_no_data)
+            binding.tvLocation.text = location
 
-        val location = data.name ?: getString(R.string.text_no_data)
-        binding.tvLocation.text = location
+            var humidity = 0
 
-        var humidity = 0
+            data.main?.let { mainData ->
 
-        data.main?.let { mainData ->
+                mainData.temp?.let {
+                    binding.tvCurrentTemp.text = "$it"
+                }
 
-            mainData.temp?.let {
-                binding.tvCurrentTemp.text = "$it"
+                val tempMin = mainData.tempMin ?: 0
+                val tempMax = mainData.tempMax ?: 0
+
+                binding.tvCurrentMaxMinTemp.text = "($tempMax/$tempMin) ${getString(R.string.text_celsius)}"
+
+                humidity = mainData.humidity ?: 0
             }
 
-            val tempMin = mainData.tempMin ?: 0
-            val tempMax = mainData.tempMax ?: 0
+            val weather = data.weather
+            val description = if (weather.size > 0) {
+                weather[0].description
+            } else {
+                getString(R.string.text_no_data)
+            }
 
-            binding.tvCurrentMaxMinTemp.text = "($tempMax/$tempMin) ${getString(R.string.text_celsius)}"
-
-            humidity = mainData.humidity ?: 0
-        }
-
-        val weather = data.weather
-        val description = if (weather.size > 0) {
-            weather[0].description
+            val weatherDescription = String.format(getString(R.string.text_weather_description), description, "$humidity%")
+            binding.tvCurrentWeatherDescription.text = weatherDescription
         } else {
-            getString(R.string.text_no_data)
+            Log.d(AppConstant.LOG_TAG, "No data available to show")
+            updateNoDataUi()
         }
-
-        val weatherDescription = String.format(getString(R.string.text_weather_description), description, "$humidity%")
-        binding.tvCurrentWeatherDescription.text = weatherDescription
     }
 
     private fun updateForecastData(data: ForecastWeatherData) {
-        var adapter = ForecastInfoAdapter(activity, data.list)
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.adapter = adapter
+        val cod = data.cod ?: ""
+        if (cod.isNotEmpty()) {
+            var adapter = ForecastInfoAdapter(activity, data.list)
+            binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+            binding.recyclerView.adapter = adapter
+        } else {
+            Log.d(AppConstant.LOG_TAG, "No data available to show")
+            updateNoDataUi()
+        }
+    }
+
+    private fun updateNoDataUi() {
+        binding.rlCurrentData.visibility = View.GONE
+        binding.rlForecastData.visibility = View.GONE
+        binding.tvNoData.visibility = View.VISIBLE
+        binding.tvNoData.text = "${getString(R.string.text_no_data)} \n ${getString(R.string.text_no_connectivity)}"
     }
 }
