@@ -32,7 +32,7 @@ class WeatherInfoViewModel @Inject constructor(private val repository: WeatherIn
 
         coroutinescope.launch {
 
-            val response = repository.getCurrentWeatherInfo(latitude, longitude, appId)
+            val response = repository.getCurrentWeatherInfo(latitude, longitude, appId, "metric")
 
             withContext(Dispatchers.Main) {
 

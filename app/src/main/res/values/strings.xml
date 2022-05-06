@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="text_sample_value">20</string>
+    <string name="text_humidity">Humidity</string>
+    <string name="text_celsius">\u2103</string>
+    <string name="text_dummy_date">06,May,2022</string>
+    <string name="text_dummy_location">London,GB</string>
+    <string name="text_no_data">No data</string>
+    <string name="text_weather_description">Surrounding is %1$s &amp; humidity is %2$s</string>
 </resources>

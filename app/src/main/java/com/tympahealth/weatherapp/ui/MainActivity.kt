@@ -3,6 +3,7 @@ package com.tympahealth.weatherapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.tympahealth.weatherapp.R
