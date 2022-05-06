@@ -41,8 +41,8 @@ class WeatherInfoFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getCurrentWeatherInfo("19.8762", "75.3433", AppConstant.API_ID)
-        viewModel.getForecastWeatherInfo("19.8762", "75.3433", AppConstant.API_ID)
+        viewModel.getCurrentWeatherInfo("London", AppConstant.API_ID)
+        viewModel.getForecastWeatherInfo("London", AppConstant.API_ID)
     }
 
     private fun attachObserver() {

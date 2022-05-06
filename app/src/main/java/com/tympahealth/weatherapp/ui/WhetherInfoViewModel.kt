@@ -26,13 +26,13 @@ class WeatherInfoViewModel @Inject constructor(private val repository: WeatherIn
 
     var forecastWeatherLiveData = MutableLiveData<ForecastWeatherData>()
 
-    fun getCurrentWeatherInfo(latitude: String, longitude: String, appId: String) {
+    fun getCurrentWeatherInfo(locationName: String, appId: String) {
 
         loaderLiveData.value = true
 
         coroutinescope.launch {
 
-            val response = repository.getCurrentWeatherInfo(latitude, longitude, appId, "metric")
+            val response = repository.getCurrentWeatherInfo(locationName, appId, "metric")
 
             withContext(Dispatchers.Main) {
 
@@ -46,12 +46,12 @@ class WeatherInfoViewModel @Inject constructor(private val repository: WeatherIn
         }
     }
 
-    fun getForecastWeatherInfo(latitude: String, longitude: String, appId: String) {
+    fun getForecastWeatherInfo(locationName: String, appId: String) {
         loaderLiveData.value = true
 
         coroutinescope.launch {
 
-            val response = repository.getForecastWeatherInfo(latitude, longitude, appId, "metric")
+            val response = repository.getForecastWeatherInfo(locationName, appId, "metric")
 
             withContext(Dispatchers.Main) {
 
