@@ -58,6 +58,8 @@ class WeatherInfoFragment : Fragment() {
             viewModel.getForecastWeatherInfo(AppConstant.LOCATION, AppConstant.API_ID)
         } else {
             binding.swipeLayout.isRefreshing = false
+            viewModel.getCacheData(AppConstant.SP_CURRENT_WEATHER_DATA)
+            viewModel.getCacheData(AppConstant.SP_FORECAST_WEATHER_DATA)
             activity.showError(getString(R.string.text_no_connectivity))
         }
     }

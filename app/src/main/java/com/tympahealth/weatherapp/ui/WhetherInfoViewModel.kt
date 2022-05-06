@@ -1,8 +1,10 @@
 package com.tympahealth.weatherapp.ui
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
 import com.tympahealth.weatherapp.data.AppConstant
 import com.tympahealth.weatherapp.data.model.current.CurrentWeatherData
 import com.tympahealth.weatherapp.data.model.forecast.ForecastWeatherData
@@ -12,7 +14,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherInfoViewModel @Inject constructor(private val repository: WeatherInfoRepository) : ViewModel() {
+class WeatherInfoViewModel @Inject constructor(private val repository: WeatherInfoRepository, private val preferences: SharedPreferences, private val gson: Gson) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable -> onError("Exception:: ${throwable.message}") }
 
@@ -39,6 +41,7 @@ class WeatherInfoViewModel @Inject constructor(private val repository: WeatherIn
                 if (response.isSuccessful) {
                     currentWeatherLiveData.value = response.body()
                     loaderLiveData.value = false
+                    cacheWeatherData(AppConstant.SP_CURRENT_WEATHER_DATA, gson.toJson(response.body()))
                 } else {
                     onError("Error:: ${response.message()}")
                 }
@@ -58,6 +61,7 @@ class WeatherInfoViewModel @Inject constructor(private val repository: WeatherIn
                 if (response.isSuccessful) {
                     forecastWeatherLiveData.value = response.body()
                     loaderLiveData.value = false
+                    cacheWeatherData(AppConstant.SP_FORECAST_WEATHER_DATA, gson.toJson(response.body()))
                 } else {
                     onError("Error:: ${response.message()}")
                 }
@@ -70,6 +74,28 @@ class WeatherInfoViewModel @Inject constructor(private val repository: WeatherIn
 
         loaderLiveData.postValue(false)
         errorLiveData.postValue(message)
+    }
+
+    private fun cacheWeatherData(tag: String, data: String) {
+        Log.d(AppConstant.LOG_TAG, "cacheWeatherData $tag $data")
+        val edit = preferences.edit()
+        edit.putString(tag, data)
+        edit.commit()
+    }
+
+    fun getCacheData(tag: String) {
+        val json = preferences.getString(tag, "{}")
+        when (tag) {
+            AppConstant.SP_CURRENT_WEATHER_DATA -> {
+                val data = gson.fromJson(json, CurrentWeatherData::class.java)
+                currentWeatherLiveData.postValue(data)
+            }
+            AppConstant.SP_FORECAST_WEATHER_DATA -> {
+                val data = gson.fromJson(json, ForecastWeatherData::class.java)
+                forecastWeatherLiveData.postValue(data)
+            }
+        }
+        loaderLiveData.value = false
     }
 
     override fun onCleared() {

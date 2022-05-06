@@ -3,6 +3,7 @@ package com.tympahealth.weatherapp.di
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.google.gson.Gson
 import com.tympahealth.weatherapp.data.api.WeatherInfoApi
 import com.tympahealth.weatherapp.data.repository.WeatherInfoRepository
 import dagger.Module
@@ -48,6 +49,12 @@ class WeatherInfoModule {
     @Singleton
     @Provides
     fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("preferences_name", Context.MODE_PRIVATE)
+        return context.getSharedPreferences("preferences_weather_app", Context.MODE_PRIVATE)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson {
+        return Gson()
     }
 }
