@@ -53,8 +53,8 @@ class WeatherInfoFragment : Fragment() {
     }
 
     private fun fetchWeatherInfo() {
-        viewModel.getCurrentWeatherInfo("London", AppConstant.API_ID)
-        viewModel.getForecastWeatherInfo("London", AppConstant.API_ID)
+        viewModel.getCurrentWeatherInfo(AppConstant.LOCATION, AppConstant.API_ID)
+        viewModel.getForecastWeatherInfo(AppConstant.LOCATION, AppConstant.API_ID)
     }
 
     private fun attachObserver() {
