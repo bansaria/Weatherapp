@@ -7,5 +7,5 @@ class WeatherInfoRepository @Inject constructor(private val apiService: WeatherI
 
     suspend fun getCurrentWeatherInfo(latitude: String, longitude: String, appId: String, units: String) = apiService.getCurrentWeatherInfo(latitude, longitude, appId, units)
 
-    suspend fun getForecastWeatherInfo(latitude: String, longitude: String, appId: String) = apiService.getForecastWeatherInfo(latitude, longitude, appId)
+    suspend fun getForecastWeatherInfo(latitude: String, longitude: String, appId: String, units: String) = apiService.getForecastWeatherInfo(latitude, longitude, appId, units)
 }

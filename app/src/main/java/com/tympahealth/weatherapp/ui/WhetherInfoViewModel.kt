@@ -47,7 +47,22 @@ class WeatherInfoViewModel @Inject constructor(private val repository: WeatherIn
     }
 
     fun getForecastWeatherInfo(latitude: String, longitude: String, appId: String) {
+        loaderLiveData.value = true
 
+        coroutinescope.launch {
+
+            val response = repository.getForecastWeatherInfo(latitude, longitude, appId, "metric")
+
+            withContext(Dispatchers.Main) {
+
+                if (response.isSuccessful) {
+                    forecastWeatherLiveData.value = response.body()
+                    loaderLiveData.value = false
+                } else {
+                    onError("Error:: ${response.message()}")
+                }
+            }
+        }
     }
 
     private fun onError(message: String) {

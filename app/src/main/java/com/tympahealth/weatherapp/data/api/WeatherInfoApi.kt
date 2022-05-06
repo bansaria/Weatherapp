@@ -13,5 +13,5 @@ interface WeatherInfoApi {
     suspend fun getCurrentWeatherInfo(@Query("lat") lat: String, @Query("lon") lon: String, @Query("appid") appid: String, @Query("units") units: String): Response<CurrentWeatherData>
 
     @GET("forecast")
-    suspend fun getForecastWeatherInfo(@Query("lat") lat: String, @Query("lon") lon: String, @Query("appid") appid: String): Response<ForecastWeatherData>
+    suspend fun getForecastWeatherInfo(@Query("lat") lat: String, @Query("lon") lon: String, @Query("appid") appid: String,@Query("units") units: String): Response<ForecastWeatherData>
 }
