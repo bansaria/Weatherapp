@@ -121,6 +121,7 @@ class WeatherInfoFragment : Fragment() {
 
             val weatherDescription = String.format(getString(R.string.text_weather_description), description, "$humidity%")
             binding.tvCurrentWeatherDescription.text = weatherDescription
+            updateDataAvailableUi()
         } else {
             Log.d(AppConstant.LOG_TAG, "No data available to show")
             updateNoDataUi()
@@ -133,6 +134,7 @@ class WeatherInfoFragment : Fragment() {
             var adapter = ForecastInfoAdapter(activity, data.list)
             binding.recyclerView.layoutManager = LinearLayoutManager(activity)
             binding.recyclerView.adapter = adapter
+            updateDataAvailableUi()
         } else {
             Log.d(AppConstant.LOG_TAG, "No data available to show")
             updateNoDataUi()
@@ -143,6 +145,13 @@ class WeatherInfoFragment : Fragment() {
         binding.rlCurrentData.visibility = View.GONE
         binding.rlForecastData.visibility = View.GONE
         binding.tvNoData.visibility = View.VISIBLE
+        binding.tvNoData.text = "${getString(R.string.text_no_data)} \n ${getString(R.string.text_no_connectivity)}"
+    }
+
+    private fun updateDataAvailableUi() {
+        binding.rlCurrentData.visibility = View.VISIBLE
+        binding.rlForecastData.visibility = View.VISIBLE
+        binding.tvNoData.visibility = View.GONE
         binding.tvNoData.text = "${getString(R.string.text_no_data)} \n ${getString(R.string.text_no_connectivity)}"
     }
 }
