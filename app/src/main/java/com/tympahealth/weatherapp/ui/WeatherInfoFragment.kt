@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tympahealth.weatherapp.R
 import com.tympahealth.weatherapp.data.AppConstant
 import com.tympahealth.weatherapp.data.model.current.CurrentWeatherData
 import com.tympahealth.weatherapp.data.model.forecast.ForecastWeatherData
 import com.tympahealth.weatherapp.databinding.FragmentWeatherInfoBinding
+import com.tympahealth.weatherapp.ui.adapter.ForecastInfoAdapter
 import com.tympahealth.weatherapp.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -97,7 +99,9 @@ class WeatherInfoFragment : Fragment() {
         binding.tvCurrentWeatherDescription.text = weatherDescription
     }
 
-    private fun updateForecastData(data: ForecastWeatherData?) {
-
+    private fun updateForecastData(data: ForecastWeatherData) {
+        var adapter = ForecastInfoAdapter(activity, data.list)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.adapter = adapter
     }
 }

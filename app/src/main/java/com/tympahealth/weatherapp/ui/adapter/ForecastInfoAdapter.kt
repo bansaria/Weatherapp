@@ -28,7 +28,7 @@ class ForecastInfoAdapter(private val context: Context, private val forecastList
 
         fun bind(data: List) {
             val date = data.dt ?: 0
-            binder.tvDay.text = Util.convertUnixTimeLocalTime(date)
+            binder.tvDay.text = Util.convertUnixTimeDay(date)
 
             var humidity = 0
 
