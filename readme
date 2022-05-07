@@ -1,0 +1,13 @@
+Instruction
+1. Its single activity with one fragment app and user can do pull to refresh weather data.
+2. Have used sharedpreference to store local cache.
+
+
+Improvements
+1. Will able to write unit test and mock test for the api
+2. Will design UI with great user experience
+3. Will add animation while showing data on UI
+4. Can show the weather details with image icon that help us to improve UX
+5. Now local cache is stored in plain text, can use encryption to store it
+6. To make app secure can able to use SSL pining
+7. Can add portrait and landscape support for the app. Now in landscape mode UI not looking proper
